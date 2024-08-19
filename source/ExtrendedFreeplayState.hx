@@ -51,7 +51,7 @@ class ExtrendedFreeplayState extends MusicBeatState
 
         #if desktop DiscordClient.changePresence("In the Extra Songs Menu", null); #end
 
-        bg.loadGraphic('backgrounds/freeplay/secret');
+        bg.loadGraphic('backgrounds/freeplay/speis');
 		bg.screenCenter();
 		add(bg);
 
