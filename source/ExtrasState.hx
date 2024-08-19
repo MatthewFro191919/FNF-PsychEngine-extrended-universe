@@ -32,25 +32,11 @@ class ExtrasState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-		
-	var coolPos:Array<Float> = [
-		97.8,
-		498.7,
-		899.65,
-		#if switch
-		298.25,
-		699.15
-		#else
-		97.8,
-		498.7,
-		899.6
-		#end
-	];
 
 	var optionShit:Array<String> = [
 		#if MODS_ALLOWED 'mods', #end
-		'credits',
-		#if !switch 'discord' #end
+		#if !switch 'discord', #end
+		'credits'
 	];
 
 	var magenta:FlxSprite;
@@ -122,15 +108,18 @@ class ExtrasState extends MusicBeatState
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var upDown:Bool = (i > 2);
-			var menuThing:FlxSprite = new FlxSprite(coolPos[i], upDown ? 367.65 : 20);
-			trace(coolPos[i]);
-			menuThing.antialiasing = ClientPrefs.globalAntialiasing;
-			menuThing.frames = Paths.getSparrowAtlas('menuStuff');
-			menuThing.animation.addByPrefix('idle', optionShit[i] + '0');
-			menuThing.animation.addByPrefix('selected', optionShit[i] + '_SELECTED');
-			menuThing.animation.play('idle');
-			menuThing.ID = i;
-			menuItems.add(menuThing);
+			var menuThing1:FlxSprite = new FlxSprite(237, 199).loadGraphic(Paths.image('mainmenu/mods'));
+			menuThing1.antialiasing = ClientPrefs.globalAntialiasing;
+			menuThing1.ID = i;
+			menuItems.add(menuThing1);
+			var menuThing2:FlxSprite = new FlxSprite(275, 482).loadGraphic(Paths.image('mainmenu/server'));
+			menuThing2.antialiasing = ClientPrefs.globalAntialiasing;
+			menuThing2.ID = i;
+			menuItems.add(menuThing2);
+			var menuThing3:FlxSprite = new FlxSprite(268, 702).loadGraphic(Paths.image('mainmenu/credits'));
+			menuThing3.antialiasing = ClientPrefs.globalAntialiasing;
+			menuThing3.ID = i;
+			menuItems.add(menuThing3);
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
@@ -278,6 +267,21 @@ class ExtrasState extends MusicBeatState
 			curSelected = 0;
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
+		if (curSelected = 'mods')
+			var menuchar1:FlxSprite = new FlxSprite(238, 199).loadGraphic(Paths.image('backgrounds/mods'));
+			menuchar1.antialiasing = ClientPrefs.globalAntialiasing;
+			menuchar1.ID = i;
+			menuItems.add(menuchar1);
+		if (curSelected = 'discord')
+			var menuchar2:FlxSprite = new FlxSprite(218, 199).loadGraphic(Paths.image('backgrounds/discord'));
+			menuchar2.antialiasing = ClientPrefs.globalAntialiasing;
+			menuchar2.ID = i;
+			menuItems.add(menuchar2);
+		if (curSelected = 'credits')
+			var menuchar3:FlxSprite = new FlxSprite(218, 199).loadGraphic(Paths.image('backgrounds/credits'));
+			menuchar3.antialiasing = ClientPrefs.globalAntialiasing;
+			menuchar3.ID = i;
+			menuItems.add(menuchar3);
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
