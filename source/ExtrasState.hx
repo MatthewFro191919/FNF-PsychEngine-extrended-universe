@@ -108,18 +108,29 @@ class ExtrasState extends MusicBeatState
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var upDown:Bool = (i > 2);
-			var menuThing1:FlxSprite = new FlxSprite(237, 199).loadGraphic(Paths.image('mainmenu/mods'));
-			menuThing1.antialiasing = ClientPrefs.globalAntialiasing;
-			menuThing1.ID = i;
-			menuItems.add(menuThing1);
-			var menuThing2:FlxSprite = new FlxSprite(275, 482).loadGraphic(Paths.image('mainmenu/server'));
-			menuThing2.antialiasing = ClientPrefs.globalAntialiasing;
-			menuThing2.ID = i;
-			menuItems.add(menuThing2);
-			var menuThing3:FlxSprite = new FlxSprite(268, 702).loadGraphic(Paths.image('mainmenu/credits'));
-			menuThing3.antialiasing = ClientPrefs.globalAntialiasing;
-			menuThing3.ID = i;
-			menuItems.add(menuThing3);
+			var menuItem = new FlxSprite(237, 199).loadGraphic(Paths.image('mainmenu/' + optionShit[i]));
+			menuItem.scale.x = scale;
+			menuItem.scale.y = scale;
+			menuItem.ID = i;
+			menuItem.screenCenter(X);
+			menuItems.add(menuItem);
+			var scr:Float = (optionShit.length - 4) * 0.135;
+			if(optionShit.length < 6) scr = 0;
+			menuItem.scrollFactor.set(0, scr);
+			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
+			menuItem.updateHitbox();
+			
+			var menuChar = new FlxSprite(238, 199).loadGraphic(Paths.image('backgrounds/' + optionShit[i]));
+			menuChar.scale.x = scale;
+			menuChar.scale.y = scale;
+			menuChar.ID = i;
+			menuChar.screenCenter(X);
+			menuItems.add(menuChar);
+			var scr:Float = (optionShit.length - 4) * 0.135;
+			if(optionShit.length < 6) scr = 0;
+			menuChar.scrollFactor.set(0, scr);
+			menuChar.antialiasing = ClientPrefs.globalAntialiasing;
+			menuChar.updateHitbox();
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
@@ -229,7 +240,7 @@ class ExtrasState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									case 'play':
+									case 'discord':
 									#if MODS_ALLOWED
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
@@ -267,21 +278,6 @@ class ExtrasState extends MusicBeatState
 			curSelected = 0;
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
-		if (curSelected = 'mods')
-			var menuchar1:FlxSprite = new FlxSprite(238, 199).loadGraphic(Paths.image('backgrounds/mods'));
-			menuchar1.antialiasing = ClientPrefs.globalAntialiasing;
-			menuchar1.ID = i;
-			menuItems.add(menuchar1);
-		if (curSelected = 'discord')
-			var menuchar2:FlxSprite = new FlxSprite(218, 199).loadGraphic(Paths.image('backgrounds/discord'));
-			menuchar2.antialiasing = ClientPrefs.globalAntialiasing;
-			menuchar2.ID = i;
-			menuItems.add(menuchar2);
-		if (curSelected = 'credits')
-			var menuchar3:FlxSprite = new FlxSprite(218, 199).loadGraphic(Paths.image('backgrounds/credits'));
-			menuchar3.antialiasing = ClientPrefs.globalAntialiasing;
-			menuchar3.ID = i;
-			menuItems.add(menuchar3);
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{

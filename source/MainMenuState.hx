@@ -106,18 +106,33 @@ class MainMenuState extends MusicBeatState
 		{
 			        var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			        var upDown:Bool = (i > 2);
-				var menuThing1:FlxSprite = new FlxSprite(237, 199).loadGraphic(Paths.image('mainmenu/play'));
-				menuThing1.antialiasing = ClientPrefs.globalAntialiasing;
-				menuThing1.ID = i;
-				menuItems.add(menuThing1);
-				var menuThing2:FlxSprite = new FlxSprite(275, 482).loadGraphic(Paths.image('mainmenu/extras'));
-				menuThing2.antialiasing = ClientPrefs.globalAntialiasing;
-				menuThing2.ID = i;
-				menuItems.add(menuThing2);
-				var menuThing3:FlxSprite = new FlxSprite(268, 702).loadGraphic(Paths.image('mainmenu/options'));
-				menuThing3.antialiasing = ClientPrefs.globalAntialiasing;
-				menuThing3.ID = i;
-				menuItems.add(menuThing3);
+			var menuItem = new FlxSprite().loadGraphic(Paths.image('mainmenu/' + optionShit[i]));
+			menuItem.scale.x = scale;
+			menuItem.scale.y = scale;
+			menuItem.x = 237;
+			menuItem.y = 199;
+			menuItem.ID = i;
+			menuItem.screenCenter(X);
+			menuItems.add(menuItem);
+			var scr:Float = (optionShit.length - 4) * 0.135;
+			if(optionShit.length < 6) scr = 0;
+			menuItem.scrollFactor.set(0, scr);
+			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
+			menuItem.updateHitbox();
+			
+			var menuChar = new FlxSprite().loadGraphic(Paths.image('mainmenu/' + optionShit[i]));
+			menuChar.scale.x = scale;
+			menuChar.scale.y = scale;
+			menuChar.x = 238;
+			menuChar.y = 199;
+			menuChar.ID = i;
+			menuChar.screenCenter(X);
+			menuItems.add(menuChar);
+			var scr:Float = (optionShit.length - 4) * 0.135;
+			if(optionShit.length < 6) scr = 0;
+			menuChar.scrollFactor.set(0, scr);
+			menuChar.antialiasing = ClientPrefs.globalAntialiasing;
+			menuChar.updateHitbox();
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
@@ -255,7 +270,6 @@ class MainMenuState extends MusicBeatState
 			spr.screenCenter(X);
 		});
 	}
-
 	function changeItem(huh:Int = 0)
 	{
 		curSelected += huh;
@@ -264,21 +278,6 @@ class MainMenuState extends MusicBeatState
 			curSelected = 0;
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
-		if (curSelected = 'play')
-			var menuchar1:FlxSprite = new FlxSprite(237, 199).loadGraphic(Paths.image('backgrounds/play'));
-			menuchar1.antialiasing = ClientPrefs.globalAntialiasing;
-			menuchar1.ID = i;
-			menuItems.add(menuchar1);
-		if (curSelected = 'extras')
-			var menuchar2:FlxSprite = new FlxSprite(218, 199).loadGraphic(Paths.image('backgrounds/extras'));
-			menuchar2.antialiasing = ClientPrefs.globalAntialiasing;
-			menuchar2.ID = i;
-			menuItems.add(menuchar2);
-		if (curSelected = 'options')
-			var menuchar3:FlxSprite = new FlxSprite(218, 199).loadGraphic(Paths.image('backgrounds/options'));
-			menuchar3.antialiasing = ClientPrefs.globalAntialiasing;
-			menuchar3.ID = i;
-			menuItems.add(menuchar3);
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{

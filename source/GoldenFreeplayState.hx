@@ -76,11 +76,6 @@ class GoldenFreeplayState extends MusicBeatState
 
             var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
-			if(songs[i].blackoutIcon)
-			{
-				icon.color = FlxColor.BLACK;
-			}
-
 			iconArray.push(icon);
 			add(icon);
 		}
@@ -108,13 +103,12 @@ class GoldenFreeplayState extends MusicBeatState
 		}
 	}
 
-    public function addSong(songName:String, weekNum:Int, songCharacter:String, blackoutIcon:Bool = false)
+    public function addSong(songName:String, weekNum:Int, songCharacter:String)
 	{
 		#if (flixel < "4.11.0")
-		songs.push(new SongMetadata(songName, weekNum, songCharacter, blackoutIcon));
+		songs.push(new SongMetadata(songName, weekNum, songCharacter));
 		#end
 	}
-
     override function update(p:Float)
 	{
 		if (FlxG.sound.music.volume < 0.7)
@@ -131,7 +125,7 @@ class GoldenFreeplayState extends MusicBeatState
             changeSelection(1);
 
         if (controls.BACK)
-            FlxG.switchState(new CategorySelect());
+            FlxG.switchState(new MainMenuState());
 
         if (controls.ACCEPT)
 		{
@@ -146,18 +140,10 @@ class GoldenFreeplayState extends MusicBeatState
                     PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
                     PlayState.isStoryMode = false;
                     PlayState.storyDifficulty = 1;
-                    PlayState.xtraSong = true;
-
-					PlayState.formoverride = 'none';
-
                     PlayState.storyWeek = songs[curSelected].week;
 					if(songs[curSelected].songName.toLowerCase() == 'cuberoot' || songs[curSelected].songName.toLowerCase() == 'cycles')
 					{
 						LoadingState.loadAndSwitchState(new PlayState());
-					}
-					else
-					{
-						LoadingState.loadAndSwitchState(new CharacterSelectState());
 					}
             }
 		}
