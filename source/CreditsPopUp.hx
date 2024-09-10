@@ -46,6 +46,8 @@ class CreditsPopUp extends FlxSpriteGroup
 			songCreator = 'roblox2aj';
 		  case 'binomial':
 			songCreator = 'amgunt';
+		  case 'egg-torsion':
+			songCreator = null;
 		}
 		switch (PlayState.storyWeek)
 		{
@@ -59,6 +61,8 @@ class CreditsPopUp extends FlxSpriteGroup
 				headingPath = {path: 'songHeadings/roblox2ajHeading', antiAliasing: true, iconOffset: 0};
 			case 4:
 				headingPath = {path: 'songHeadings/amguntHeading', antiAliasing: false, iconOffset: 0};
+			case 5:
+                		bg = new FlxSprite().makeGraphic(400, 50, FlxColor.WHITE);
         	}
 		switch (PlayState.SONG.song.toLowerCase())
 		{
