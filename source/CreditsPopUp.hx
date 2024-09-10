@@ -49,15 +49,15 @@ class CreditsPopUp extends FlxSpriteGroup
 		}
 		switch (PlayState.storyWeek)
 		{
-			case 0 | 1:
+			case 0 
 				headingPath = {path: 'songHeadings/stremblixHeading', antiAliasing: false, iconOffset: 0};
-			case 2:
+			case 1:
 				headingPath = {path: 'songHeadings/hazetalHeading', antiAliasing: true, iconOffset: 0};
-			case 3:
+			case 2:
 				headingPath = {path: 'songHeadings/zlixHeading', antiAliasing: false, iconOffset: 0};
-			case 4:
+			case 3:
 				headingPath = {path: 'songHeadings/roblox2ajHeading', antiAliasing: true, iconOffset: 0};
-			case 5:
+			case 4:
 				headingPath = {path: 'songHeadings/amguntHeading', antiAliasing: false, iconOffset: 0};
         	}
 		switch (PlayState.SONG.song.toLowerCase())
