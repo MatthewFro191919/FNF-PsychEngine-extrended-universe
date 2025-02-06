@@ -47,7 +47,7 @@ jobs:
           haxelib install hxCodec 2.5.1
           haxelib install hscript
           haxelib git lime https://github.com/mcagabe19-stuff/lime
-          haxelib install linc_luajit
+          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit 1906c4a96f6bb6df66562b3f24c62f4c5bba14a7
       - name: Compile
         run: haxelib run lime build windows -D officialBuild
 
