@@ -69,19 +69,6 @@ class DaveAndBambiFreeplayState extends MusicBeatState
 		swagText.y += 50;
 		add(swagText);
 
-		for (i in 0...songs.length)
-		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
-			songText.isMenuItem = true;
-			songText.targetY = i;
-			grpSongs.add(songText);
-
-            var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
-			icon.sprTracker = songText;
-			iconArray.push(icon);
-			add(icon);
-		}
-
 		changeSelection();
 
         super.create();
@@ -93,16 +80,6 @@ class DaveAndBambiFreeplayState extends MusicBeatState
 			songCharacters = ['bf'];
 
 		var num:Int = 0;
-		for (song in songs)
-		{
-            if ((song.toLowerCase() == 'dave-x-bambi-shipping-cute' && !FlxG.save.data.shipUnlocked) || (song.toLowerCase() == 'recovered-project' && !FlxG.save.data.foundRecoveredProject))
-                addSong('unknown', weekNum, songCharacters[num], true);
-            else
-			    addSong(song, weekNum, songCharacters[num], false);
-
-			if (songCharacters.length != 1)
-				num++;
-		}
 	}
 
     public function addSong(songName:String, weekNum:Int, songCharacter:String)

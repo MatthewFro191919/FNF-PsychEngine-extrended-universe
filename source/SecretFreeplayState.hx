@@ -68,24 +68,6 @@ class SecretFreeplayState extends MusicBeatState
 		swagText.y += 50;
 		add(swagText);
 
-		for (i in 0...songs.length)
-		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
-			songText.isMenuItem = true;
-			songText.targetY = i;
-			grpSongs.add(songText);
-
-            var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
-			icon.sprTracker = songText;
-			if(songs[i].blackoutIcon)
-			{
-				icon.color = FlxColor.BLACK;
-			}
-
-			iconArray.push(icon);
-			add(icon);
-		}
-
 		changeSelection();
 
         super.create();
@@ -97,22 +79,12 @@ class SecretFreeplayState extends MusicBeatState
 			songCharacters = ['bf'];
 
 		var num:Int = 0;
-		for (song in songs)
-		{
-            if ((song.toLowerCase() == 'dave-x-bambi-shipping-cute' && !FlxG.save.data.shipUnlocked) || (song.toLowerCase() == 'recovered-project' && !FlxG.save.data.foundRecoveredProject))
-                addSong('unknown', weekNum, songCharacters[num], true);
-            else
-			    addSong(song, weekNum, songCharacters[num], false);
-
-			if (songCharacters.length != 1)
-				num++;
-		}
 	}
 
-    public function addSong(songName:String, weekNum:Int, songCharacter:String, blackoutIcon:Bool = false)
+    public function addSong(songName:String, weekNum:Int, songCharacter:String)
 	{
 		#if (flixel < "4.11.0")
-		songs.push(new SongMetadata(songName, weekNum, songCharacter, blackoutIcon));
+		songs.push(new SongMetadata(songName, weekNum, songCharacter));
 		#end
 	}
 
@@ -132,7 +104,7 @@ class SecretFreeplayState extends MusicBeatState
             changeSelection(1);
 
         if (controls.BACK)
-            FlxG.switchState(new CategorySelect());
+            FlxG.switchState(new MainMenuState());
 
         if (controls.ACCEPT)
 		{
@@ -147,9 +119,6 @@ class SecretFreeplayState extends MusicBeatState
                     PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
                     PlayState.isStoryMode = false;
                     PlayState.storyDifficulty = 1;
-                    PlayState.xtraSong = true;
-
-					PlayState.formoverride = 'none';
 
                     PlayState.storyWeek = songs[curSelected].week;
 					if(songs[curSelected].songName.toLowerCase() == 'cuberoot' || songs[curSelected].songName.toLowerCase() == 'cycles')
@@ -158,7 +127,7 @@ class SecretFreeplayState extends MusicBeatState
 					}
 					else
 					{
-						LoadingState.loadAndSwitchState(new CharacterSelectState());
+						LoadingState.loadAndSwitchState(new PlayState());
 					}
             }
 		}
